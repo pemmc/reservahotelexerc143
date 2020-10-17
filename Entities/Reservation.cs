@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+
 
 namespace ReservaHotel.Entities
 {
@@ -31,10 +33,29 @@ namespace ReservaHotel.Entities
 
         }
 
-        public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        public string UpdateDates(DateTime checkIn, DateTime checkOut)
         {
+            
+            DateTime now = DateTime.Now;
+
+            if (checkIn < now || checkOut < now)
+            {
+
+                return "Erro na reserva";
+
+            }
+
+            if (checkOut <= checkIn)
+            {
+
+                return "Data de saída tem que ser depois da data de checkin";
+
+            }
+
             CheckIn = checkIn;
             CheckOut = checkOut;
+
+            return null;
 
         }
 

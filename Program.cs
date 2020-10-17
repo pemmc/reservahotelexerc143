@@ -13,7 +13,7 @@ namespace ReservaHotel
 
             DateTime now = DateTime.Now;
 
-            Console.WriteLine("Olá! Hoje é/ " + now.ToString("D", idiomaptBR));
+            Console.WriteLine("Olá! Hoje é: " + now.ToString("D", idiomaptBR));
             Console.WriteLine();
 
             Console.WriteLine("Room number: ");
@@ -28,7 +28,7 @@ namespace ReservaHotel
 
             DateTime checkOut = DateTime.Parse(Console.ReadLine(), idiomaptBR);
 
-            if(checkOut <= checkIn)
+            if (checkOut <= checkIn)
             {
                 Console.WriteLine("Data de saída tem que ser depois da data de checkin");
 
@@ -49,27 +49,21 @@ namespace ReservaHotel
                 Console.WriteLine("Check-out date (dd/MM/yyyy): ");
 
                 checkOut = DateTime.Parse(Console.ReadLine(), idiomaptBR);
+ 
+                string error = reservation.UpdateDates(checkIn, checkOut);
 
-               
-                if (checkIn < now || checkOut < now)
+                //Tratamento de erro... não é ainda o ideal... melhor tratar na classe reservation
+                if (error != null)
                 {
 
-                    Console.WriteLine("Erro na reserva");
-
-
-                }
-                else if (checkOut <= checkIn)
-                {
-                    Console.WriteLine("Data de saída tem que ser depois da data de checkin");
+                    Console.WriteLine("Error in reservation: " + error);
 
                 }
+
                 else
                 {
 
-                    reservation.UpdateDates(checkIn, checkOut);
-
                     Console.WriteLine("Reservation: " + reservation);
-
 
                 }
 
